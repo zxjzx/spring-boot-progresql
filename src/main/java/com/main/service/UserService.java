@@ -68,7 +68,7 @@ public class UserService {
      */
     public PageList<UserEntity> getUserList(UserEntity user, Integer currentPage, Integer pageSize) {
         PageHelper.startPage(currentPage, pageSize);
-        List<UserEntity> allList = userMapper.getAll(user,currentPage,pageSize);
+        List<UserEntity> allList = userMapper.getUserList(user,currentPage,pageSize);
         PageInfo<UserEntity> pageInfo = new PageInfo<>(allList);
 
         PageList pageList = new PageList();
@@ -80,6 +80,11 @@ public class UserService {
         pageList.setPager(pageCondition);
 
         return pageList;
+    }
+
+    public void getMyList(UserEntity user, Integer currentPage, Integer pageSize){
+        List<UserEntity> allList = userMapper.getMyList(user,currentPage,pageSize);
+        System.out.println(allList);
     }
 
     /**

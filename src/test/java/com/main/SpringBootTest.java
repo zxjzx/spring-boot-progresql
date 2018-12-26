@@ -34,9 +34,17 @@ public class SpringBootTest {
     public void testUserList() {
         UserEntity user = new UserEntity();
         user.setUserName("lily");
-        PageList<UserEntity> userList = userService.getUserList(user,1,3);
+        PageList<UserEntity> userList = userService.getUserList(user,2,3);
         System.out.println("##################################");
         System.out.println(userList);
+    }
+
+    @Test
+    public void testGetMyList() {
+        UserEntity user = new UserEntity();
+        user.setUserName("lily");
+        userService.getMyList(user,2,3);
+        System.out.println("##################################");
     }
 
     @Test

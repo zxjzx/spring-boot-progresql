@@ -8,9 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface UserMapper {
-	List<UserEntity> getAll(@Param("user") UserEntity user,@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
+	List<UserEntity> getUserList(@Param("user") UserEntity user,@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
+
+
+	List<UserEntity> getMyList(@Param("user") UserEntity user,@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
 
 	UserEntity getOne(Long id);
 

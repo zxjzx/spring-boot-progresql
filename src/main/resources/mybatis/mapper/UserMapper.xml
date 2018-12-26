@@ -19,7 +19,7 @@
 	   FROM public.user_entity
     </select>-->
 
-    <select id="getAll" resultMap="BaseResultMap">
+    <select id="getUserList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from public.user_entity
@@ -31,6 +31,10 @@
                 and user_name like concat('%',#{user.userName},'%')
             </if>
         </where>
+    </select>
+
+    <select id="getMyList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select * from public.user_entity limit #{pageNum} OFFSET #{pageSize}
     </select>
 
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap" >
