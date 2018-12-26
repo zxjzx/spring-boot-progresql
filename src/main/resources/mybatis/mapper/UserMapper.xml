@@ -13,28 +13,28 @@
         id, user_name, password, user_sex, nick_name
     </sql>
 
-    <!--<select id="getAll" resultMap="BaseResultMap"  >
-       SELECT
-       <include refid="Base_Column_List" />
-	   FROM public.user_entity
-    </select>-->
-
     <select id="getUserList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from public.user_entity
         <where>
-            <if test="user.password != null">
-                password = #{user.password}
+            <if test="user.passWord != null and user.passWord != ''">
+                password like concat('%',#{user.passWord},'%')
             </if>
             <if test="user.userName != null and user.userName != ''">
                 and user_name like concat('%',#{user.userName},'%')
             </if>
+            <if test="user.nickName != null and user.nickName != ''">
+                and nick_name like concat('%',#{user.nickName},'%')
+            </if>
+            <if test="user.userSex != null and user.userSex != ''">
+                and user_sex like concat('%',#{user.userSex},'%')
+            </if>
         </where>
     </select>
 
-    <select id="getMyList" resultMap="BaseResultMap" parameterType="java.util.Map">
-        select * from public.user_entity limit #{pageNum} OFFSET #{pageSize}
+    <select id="getMyList" resultMap="BaseResultMap">
+        select * from public.user_entity
     </select>
 
     <select id="getOne" parameterType="java.lang.Long" resultMap="BaseResultMap" >

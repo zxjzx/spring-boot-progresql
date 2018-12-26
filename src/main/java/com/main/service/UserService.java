@@ -68,7 +68,7 @@ public class UserService {
      */
     public PageList<UserEntity> getUserList(UserEntity user, Integer currentPage, Integer pageSize) {
         PageHelper.startPage(currentPage, pageSize);
-        List<UserEntity> allList = userMapper.getUserList(user,currentPage,pageSize);
+        List<UserEntity> allList = userMapper.getUserList(user);
         PageInfo<UserEntity> pageInfo = new PageInfo<>(allList);
 
         PageList pageList = new PageList();

@@ -1,10 +1,8 @@
 package com.main.controler;
 
-import java.util.List;
-
-import com.github.pagehelper.PageInfo;
-import com.main.entity.PageCondition;
 import com.main.entity.PageList;
+import com.main.entity.PagesResult;
+import com.main.pagemodel.BaseResult;
 import com.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
@@ -25,9 +23,16 @@ public class UserEntityControler {
     @RequestMapping(value = "/getUsersList/{currentPage}/{pageSize}", method = RequestMethod.POST)
     public PageList<UserEntity> getUsers(@RequestBody UserEntity user, @PathVariable("currentPage") Integer currentPage,
                                          @PathVariable("pageSize") Integer pageSize) {
-        Assert.notNull(currentPage, "currentPage不能为空");
         PageList<UserEntity> userList = userService.getUserList(user, currentPage, pageSize);
         return userList;
+    }
+
+    @RequestMapping(value = "/getUsersList2/{currentPage}/{pageSize}", method = RequestMethod.POST)
+    public BaseResult getUsers2(@RequestBody UserEntity user, @PathVariable("currentPage") Integer currentPage,
+                               @PathVariable("pageSize") Integer pageSize) {
+        PageList<UserEntity> userList = userService.getUserList(user, currentPage, pageSize);
+        PagesResult<UserEntity> result = new PagesResult<UserEntity>(userList);
+        return result;
     }
 
     @RequestMapping("/getUser")
