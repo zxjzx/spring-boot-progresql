@@ -29,16 +29,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- 加载postgresql驱动 -->  
-        <dependency>  
-            <groupId>org.postgresql</groupId>  
-            <artifactId>postgresql</artifactId>  
-            <scope>runtime</scope>  
+		<!-- 加载postgresql驱动 -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
         </dependency>
-        <!-- 加载jdbc连接数据库 -->  
-        <dependency>  
-            <groupId>org.springframework.boot</groupId>  
-             <artifactId>spring-boot-starter-jdbc</artifactId>  
+        <!-- 加载jdbc连接数据库 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
 		<!-- 加载mybatis jar包 -->
 		<dependency>
@@ -46,6 +46,14 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>1.3.2</version>
 		</dependency>
+
+        <!--pagehelper-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>

@@ -1,12 +1,16 @@
 package com.main.mapper;
 
+
+import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
+import com.main.model.UserEntity;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
-import org.mybatis.spring.annotation.MapperScan;
-
-import com.main.model.UserEntity;
+@Repository
 public interface UserMapper {
-	List<UserEntity> getAll();
+	List<UserEntity> getAll(@Param("user") UserEntity user,@Param("pageNum") int pageNum, @Param("pageSize") int pageSize);
 
 	UserEntity getOne(Long id);
 
@@ -14,5 +18,5 @@ public interface UserMapper {
 
 	void update(UserEntity user);
 
-	void delete(Long id);
+	Long delete(Long id);
 }

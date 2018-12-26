@@ -2,8 +2,12 @@ package com.main.controler;
 
 import java.util.List;
 
+import com.github.pagehelper.PageInfo;
+import com.main.entity.PageCondition;
+import com.main.entity.PageList;
 import com.main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import com.main.mapper.UserMapper;
@@ -18,10 +22,12 @@ public class UserEntityControler {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
-    public List<UserEntity> getUsers() {
-        List<UserEntity> users = userMapper.getAll();
-        return users;
+    @RequestMapping(value = "/getUsersList/{currentPage}/{pageSize}", method = RequestMethod.POST)
+    public PageList<UserEntity> getUsers(@RequestBody UserEntity user, @PathVariable("currentPage") Integer currentPage,
+                                         @PathVariable("pageSize") Integer pageSize) {
+        Assert.notNull(currentPage, "currentPage不能为空");
+        PageList<UserEntity> userList = userService.getUserList(user, currentPage, pageSize);
+        return userList;
     }
 
     @RequestMapping("/getUser")
@@ -41,7 +47,8 @@ public class UserEntityControler {
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public void delete(@PathVariable("id") Long id) {
+    public String delete(@PathVariable("id") Long id) {
         userMapper.delete(id);
+        return "success";
     }
 }

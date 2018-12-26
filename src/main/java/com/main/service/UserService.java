@@ -4,6 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.main.entity.PageCondition;
+import com.main.entity.PageList;
+import com.main.entity.PagesResult;
 import com.main.mapper.UserMapper;
 import com.main.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,21 +63,41 @@ public class UserService {
 
     /**
      * 获取所有list
+     *
      * @return
      */
-    public List<UserEntity> testMapping(){
-        List<UserEntity> list =  userMapper.getAll();
-        return list;
+    public PageList<UserEntity> getUserList(UserEntity user, Integer currentPage, Integer pageSize) {
+        PageHelper.startPage(currentPage, pageSize);
+        List<UserEntity> allList = userMapper.getAll(user,currentPage,pageSize);
+        PageInfo<UserEntity> pageInfo = new PageInfo<>(allList);
+
+        PageList pageList = new PageList();
+        pageList.setDataList(allList);
+        PageCondition pageCondition = new PageCondition();
+        pageCondition.setPageSize(pageSize);
+        pageCondition.setCurrentPage(currentPage);
+        pageCondition.setTotalCount(pageInfo.getTotal());
+        pageList.setPager(pageCondition);
+
+        return pageList;
     }
 
     /**
      * 新增
+     *
      * @param user
      * @return
      */
-    public Long insertData(UserEntity user){
+    public Long insertData(UserEntity user) {
         userMapper.insert(user);
         return user.getId();
+    }
+
+    /**
+     * 删除
+     */
+    public Long deleteData(Long id) {
+        return userMapper.delete(id);
     }
 
 }

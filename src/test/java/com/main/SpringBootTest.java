@@ -1,19 +1,20 @@
 package com.main;
 
+import com.github.pagehelper.PageInfo;
+import com.main.entity.PageList;
 import com.main.model.User;
 import com.main.model.UserEntity;
 import com.main.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
-public class SpringBootProgresqlApplicationTests {
+@org.springframework.boot.test.context.SpringBootTest
+public class SpringBootTest {
 
     @Autowired
     UserService userService;
@@ -30,10 +31,12 @@ public class SpringBootProgresqlApplicationTests {
     }
 
     @Test
-    public void testMy() {
-        List<UserEntity> list = userService.testMapping();
+    public void testUserList() {
+        UserEntity user = new UserEntity();
+        user.setUserName("lily");
+        PageList<UserEntity> userList = userService.getUserList(user,1,3);
         System.out.println("##################################");
-        System.out.println(list);
+        System.out.println(userList);
     }
 
     @Test
@@ -44,8 +47,15 @@ public class SpringBootProgresqlApplicationTests {
         user.setNickName("丽丽");
         user.setUserSex("女");
         userService.insertData(user);
+
+    }
+
+    @Test
+    public void testDelete() {
+        Long id = new Long(16);
+        Long result = userService.deleteData(id);
         System.out.println("##################################");
-        System.out.println("sucess");
+        System.out.println(result);
     }
 
 }
