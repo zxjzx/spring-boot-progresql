@@ -8,3 +8,5 @@ run SpringBootProgresqlApplication.java即可启动项目
 
 配置数据库
 ![Image text](https://raw.githubusercontent.com/zxjzx/upload-image/master/%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93.png)
+user_entity表内容
+![Image text](https://github.com/zxjzx/upload-image/blob/master/postgres.png)
