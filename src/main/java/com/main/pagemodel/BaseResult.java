@@ -107,4 +107,7 @@ public class BaseResult {
 	public static BaseResult getSuccessResult() {
 		return new BaseResult("success", WebConstants.RESULT_SUCCESS);
 	}
+	public static BaseResult getErrorResult() {
+		return new BaseResult("forbid", "禁止访问");
+	}
 }

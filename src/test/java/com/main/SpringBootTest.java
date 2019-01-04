@@ -2,6 +2,7 @@ package com.main;
 
 import com.github.pagehelper.PageInfo;
 import com.main.entity.PageList;
+import com.main.mapper.UserMapper;
 import com.main.model.User;
 import com.main.model.UserEntity;
 import com.main.service.UserService;
@@ -18,6 +19,9 @@ public class SpringBootTest {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Test
     public void contextLoads() {
@@ -40,7 +44,7 @@ public class SpringBootTest {
     }
 
     @Test
-    public void testGetMyList() {
+    public void GetMyList() {
         UserEntity user = new UserEntity();
         user.setUserName("lily");
         userService.getMyList(user,2,3);
@@ -48,7 +52,7 @@ public class SpringBootTest {
     }
 
     @Test
-    public void testInsert() {
+    public void insert() {
         UserEntity user = new UserEntity();
         user.setUserName("lily");
         user.setPassWord("123456");
@@ -59,11 +63,26 @@ public class SpringBootTest {
     }
 
     @Test
-    public void testDelete() {
+    public void delete() {
         Long id = new Long(16);
         Long result = userService.deleteData(id);
         System.out.println("##################################");
         System.out.println(result);
+    }
+
+    @Test
+    public void update(){
+        UserEntity user = new UserEntity();
+        user.setId((long) 7);
+        user.setUserName("zxj");
+        userMapper.update(user, (long) 7);
+    }
+
+    @Test
+    public void getUser(){
+        UserEntity one = userMapper.getOne((long) 7);
+        System.out.println("##################################");
+        System.out.println(one);
     }
 
 }

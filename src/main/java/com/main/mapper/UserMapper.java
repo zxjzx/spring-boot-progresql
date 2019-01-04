@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface UserMapper {
 	List<UserEntity> getUserList(@Param("user") UserEntity user);
 
@@ -18,7 +19,7 @@ public interface UserMapper {
 
 	Long insert(UserEntity user);
 
-	void update(UserEntity user);
+	void update(@Param("user") UserEntity user,@Param("id") Long id);
 
 	Long delete(Long id);
 }
